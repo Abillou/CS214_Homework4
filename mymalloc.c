@@ -9,6 +9,11 @@ void myinit(int allocAlg) {
 }
 
 void* mymalloc(size_t size){
+    
+    if(size == 0){
+        return NULL;
+    }
+
     switch(fitType){
         case 0:                        //First Fit
             break;
@@ -26,6 +31,18 @@ void myfree(void* ptr){
 }
 
 void* myrealloc(void* ptr, size_t size){
+    if(ptr == NULL && size == 0){
+        return NULL;
+    }
+
+    if(ptr == NULL){
+        mymalloc(size);
+    }
+
+    if(size == 0){
+        myfree(ptr);
+        return NULL;
+    }
 
 }
 void mycleanup(){
